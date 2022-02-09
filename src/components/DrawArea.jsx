@@ -2,8 +2,10 @@ import React,{ useLayoutEffect , useState } from 'react';
 import '../Styles/DrawArea.css'
 import rough from 'roughjs/bundled/rough.esm';
 
+const generator=rough.generator();
+
 function DrawArea() {
-    const generator=rough.generator();
+    
     useLayoutEffect(()=>{
         //retrive node in DOM which reprecent <canvas> element using element id
         const canvas = document.getElementById("canvas");
@@ -19,10 +21,10 @@ function DrawArea() {
 
         
     });
+   
   return <div>
       
-      <canvas id="canvas" width={window.innerWidth} height={window.innerHeight}>
-      
+      <canvas id="canvas" width={window.innerWidth} height={window.innerHeight}>  
       </canvas>
   </div>;
 }
