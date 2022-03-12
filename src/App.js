@@ -43,7 +43,7 @@ function App() {
         x={500}
         y={40}
         points={[0, 0, 100, 0, 100, 100]}
-        tension={0.5}
+        tension={0.08}
         closed
         stroke="pink"
         fillLinearGradientStartPoint={{ x: -50, y: -50 }}
