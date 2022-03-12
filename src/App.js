@@ -20,6 +20,7 @@ function App() {
           fontSize={20}
          />
 
+         {/* test rectangle on canvas */}
          <Rect
           x={100}
           y={40}
@@ -28,6 +29,14 @@ function App() {
           fill="yellow"
           stroke="black"
          />
+
+        {/* test circle on canvas */}
+        <Circle
+        x={350}
+        y={70}
+        radius={50}
+        fill="red"
+        />
        </Layer>
       </Stage>
 
