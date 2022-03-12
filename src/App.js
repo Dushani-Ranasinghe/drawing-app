@@ -1,5 +1,6 @@
 import './App.css';
-
+import "./Styles/Canvas.css"
+import { Stage, Layer, Rect, Text, Circle, Line } from 'react-konva';
 
 function App() {
   return (
@@ -8,10 +9,13 @@ function App() {
 
     {/* Create a Konva canvas */}
     <div className='canvas-container'>
-      <script className='konva-script'>
+      {/* set canvas width and height */}
+      <Stage width={window.innerWidth} height={window.innerHeight}>
+
+      </Stage>
 
          
-      </script>
+  
 
     </div>
     </div>
