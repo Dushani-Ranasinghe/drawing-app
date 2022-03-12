@@ -12,6 +12,10 @@ function App() {
       {/* set canvas width and height */}
       <Stage width={window.innerWidth} height={window.innerHeight}>
 
+       {/* create a layer on stage */}
+       <Layer>
+         
+       </Layer>
       </Stage>
 
          
