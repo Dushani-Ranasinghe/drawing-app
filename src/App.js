@@ -14,7 +14,11 @@ function App() {
 
        {/* create a layer on stage */}
        <Layer>
-         
+         {/* test text on canvas */}
+         <Text 
+          text='This is the text on the canvas'
+          fontSize={20}
+         />
        </Layer>
       </Stage>
 
