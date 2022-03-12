@@ -37,6 +37,19 @@ function App() {
         radius={50}
         fill="red"
         />
+
+        {/* create a shape using line in konva */}
+        <Line
+        x={500}
+        y={40}
+        points={[0, 0, 100, 0, 100, 100]}
+        tension={0.5}
+        closed
+        stroke="pink"
+        fillLinearGradientStartPoint={{ x: -50, y: -50 }}
+          fillLinearGradientEndPoint={{ x: 50, y: 50 }}
+          fillLinearGradientColorStops={[0, 'white', 1, 'purple']}
+        />
        </Layer>
       </Stage>
 
