@@ -10,7 +10,7 @@ function App() {
     {/* Create a Konva canvas */}
     <div className='canvas-container'>
       {/* set canvas width and height */}
-      <Stage width={window.innerWidth} height={window.innerHeight}>
+      <Stage width={window.innerWidth} height={window.innerHeight} className="canvas-stage">
 
        {/* create a layer on stage */}
        <Layer>
@@ -18,6 +18,15 @@ function App() {
          <Text 
           text='This is the text on the canvas'
           fontSize={20}
+         />
+
+         <Rect
+          x={100}
+          y={40}
+          width={100}
+          height={70}
+          fill="yellow"
+          stroke="black"
          />
        </Layer>
       </Stage>
