@@ -1,10 +1,13 @@
+
 import React, { Component } from "react";
-import { Stage, Layer, Arrow, Circle, Line } from "react-konva";
-import "../Styles/Canvas.css";
+import { Stage, Layer, Arrow, Circle, Line, Rect } from "react-konva";
+import "../Styles/Canvas.css"
 import Pencil from "../icons/pencil.png"
 import ArrowIcon from "../icons/arrow.png"
 import CircleIcon from "../icons/circle.png"
 import EraserIcon from "../icons/eraser.png"
+import RectangleIcon  from "../icons/rectangle.png"
+import TextIcon from "../icons/text.png"
 
 
 class Drawable {
@@ -13,7 +16,6 @@ class Drawable {
     this.starty = starty;
   }
 }
-
 // Arrow drawing function
 class ArrowDrawable extends Drawable {
   constructor(startx, starty) {
@@ -30,7 +32,22 @@ class ArrowDrawable extends Drawable {
     return <Arrow points={points} fill="black" stroke="black" />
   }
 }
+// Rectangle drawing function
+class RectangleDrawable extends ArrowDrawable {
+  constructor(startx, starty) {
+    super(startx, starty);
+    this.x = startx;
+    this.y = starty;
+  }
 
+  render() {
+    const recWidth = this.x - this.startx;
+    const recHeight = this.y - this.starty;
+    return (
+      <Rect  x={this.startx} y={this.starty} width={recWidth} height={recHeight} stroke="black" />
+    );
+  }
+}
 // Circle drawing function
 class CircleDrawable extends ArrowDrawable {
   constructor(startx, starty) {
@@ -60,9 +77,7 @@ class FreePathDrawable extends Drawable {
   render() {
     return <Line points={this.points} fill="black" stroke="black" />;
   }
-
 }
-
 // Eraser function
 class Eraser extends Drawable{
   constructor(startx, starty) {
@@ -77,7 +92,6 @@ class Eraser extends Drawable{
   }
 }
 
-
 class SceneWithDrawables extends Component {
   constructor(props) {
     super(props);
@@ -87,18 +101,17 @@ class SceneWithDrawables extends Component {
       newDrawableType: "FreePathDrawable"
     };
   }
-
 //   Create drawable classes
   getNewDrawableBasedOnType = (x, y, type) => {
     const drawableClasses = {
       FreePathDrawable,
       ArrowDrawable,
       CircleDrawable,
+      RectangleDrawable,
       Eraser
     };
     return new drawableClasses[type](x, y);
   };
-
 //   handle mouse down event when pressing the tool button
   handleMouseDown = e => {
     const { newDrawable } = this.state;
@@ -114,7 +127,6 @@ class SceneWithDrawables extends Component {
       });
     }
   };
-
 //  handle mouse up event when user release mouse click and use it to draw things
   handleMouseUp = e => {
     const { newDrawable, drawables } = this.state;
@@ -129,7 +141,6 @@ class SceneWithDrawables extends Component {
       });
     }
   };
-
 //   handle mouse move event when mouse pointer move over stage element
   handleMouseMove = e => {
     const { newDrawable } = this.state;
@@ -143,53 +154,64 @@ class SceneWithDrawables extends Component {
     }
   };
   render() {
-
     const drawables = [...this.state.drawables, ...this.state.newDrawable];
     return (
       <div>
-
+        <div className="whiteboard__container">
+        <div className="toolbar">
       {/* Tool bar */}
-        <button className="toolbar-btn"
-          onClick={e => {
-            this.setState({ newDrawableType: "ArrowDrawable" });
-          }}
+        <button className="toolbar__btn"
+          onClick={e => { this.setState({ newDrawableType: "ArrowDrawable" }); }}
         >
-          <img src={ArrowIcon} width={20} alt="pencil" className="toolbar-icon-img"/>
-          Arrow
+        <img src={ArrowIcon} width={20} alt="arrow" className="toolbar-icon-img"/>
         </button>
-        <button className="toolbar-btn"
+        <button className="toolbar__btn"
           onClick={e => {
             this.setState({ newDrawableType: "CircleDrawable" });
           }}
         >
-            <img src={CircleIcon} width={20} alt="pencil" className="toolbar-icon-img"/>
-          Circle
+            <img src={CircleIcon} width={20} alt="circle" className="toolbar-icon-img"/>
         </button>
-        <button className="toolbar-btn"
+        <button className="toolbar__btn"
           onClick={e => {
             this.setState({ newDrawableType: "FreePathDrawable" });
           }}
         >
             <img src={Pencil} width={20} alt="pencil" className="toolbar-icon-img"/>
-          Pencil
         </button>
-        <button className="toolbar-btn"
+        <button className="toolbar__btn"
           onClick={e => {
             this.setState({ newDrawableType: "Eraser" });
           }}
         >
-            <img src={EraserIcon} width={20} alt="pencil" className="toolbar-icon-img"/>
-          Eraser
+            <img src={EraserIcon} width={20} alt="eraser" className="toolbar-icon-img"/>
         </button>
-       
+           {/* ----------rectangle -------- */}
+        <button className="toolbar__btn"
+          onClick={e => {
+            this.setState({ newDrawableType: "RectangleDrawable" });
+          }}
+        >
+            <img src={RectangleIcon} width={20} alt="rectangle" className="toolbar-icon-img"/>
+        </button>
 
+        <button className="toolbar__btn"
+          onClick={e => {
+            this.setState({ newDrawableType: "RectangleDrawable" });
+          }}
+        >
+            <img src={TextIcon} width={20} alt="text" className="toolbar-icon-img"/>
+        </button>
+
+        </div>
+       
        {/* Drawing area */}
  <Stage
           onMouseDown={this.handleMouseDown}
           onMouseUp={this.handleMouseUp}
           onMouseMove={this.handleMouseMove}
-          width={1000}
-          height={900}
+          width={window.innerWidth}
+          height={window.innerHeight}
           className="canvas-stage"
         >
           <Layer className="canvas-layer">
@@ -198,16 +220,15 @@ class SceneWithDrawables extends Component {
             })}
           </Layer>
         </Stage>
+        </div>
       </div>
     );
   }
 }
-
 
 function Canvas() {
   return (
     <div><SceneWithDrawables /></div>
   )
 }
-
 export default Canvas

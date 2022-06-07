@@ -1,13 +1,49 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Julius+Sans+One&family=Overpass:wght@100;200;300;400;500&family=Poppins:wght@600&family=Roboto:wght@100;300;400;500;700;900&display=swap");
-.toolbar-btn {
+.whiteboard__container {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.toolbar {
+  border-radius: 5px;
+  background: #f9f9f9;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-box-shadow: -1px 1px 10px 1px #c2c1c1;
+          box-shadow: -1px 1px 10px 1px #c2c1c1;
+  z-index: 1;
+  margin-bottom: 5px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
+.toolbar__btn {
+  background: #f9f9f9;
   text-align: center;
-  width: 55px;
-  margin: 10px;
+  width: 45px;
+  margin: 5px;
   border-style: none;
-  background: #cecfdf;
   color: #343466;
   border-radius: 5px;
   font-family: 'Poppins', sans-serif;
+}
+
+.toolbar__btn:hover {
+  background: #cecfdf;
+  cursor: pointer;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
+}
+
+.toolbar__btn:active {
+  background: #cecfdf;
 }
 
 .toolbar-icon-img {
@@ -24,7 +60,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: bisque;
   width: 100%;
   height: 100%;
 }
@@ -32,6 +67,5 @@
 .canvas-layer {
   width: 100%;
   height: 100%;
-  color: aquamarine;
 }
 /*# sourceMappingURL=Canvas.css.map */
