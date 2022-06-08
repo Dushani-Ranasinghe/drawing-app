@@ -6,9 +6,6 @@ function App() {
   return (
   <div className="app">
     <div className="app-container">
-      <div className="app-header">
-        My Whiteboard
-      </div>
       <div className="app-canvas">
       <Canvas/>
       </div>

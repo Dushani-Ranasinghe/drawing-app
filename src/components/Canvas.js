@@ -70,12 +70,16 @@ class FreePathDrawable extends Drawable {
   constructor(startx, starty) {
     super(startx, starty);
     this.points = [startx, starty];
+    this.state ={BrushSize : "10" }
   }
+
+  handlePencilSizeChange = ({BrushSize}) => {this.setState(BrushSize.target.BrushSize)};
+
   registerMovement(x, y) {
     this.points = [...this.points, x, y];
   }
   render() {
-    return <Line points={this.points} fill="black" stroke="black" />;
+    return <Line points={this.points} fill="black" stroke="black" tension = {this.BrushSize} />;
   }
 }
 // Eraser function
@@ -88,7 +92,7 @@ class Eraser extends Drawable{
     this.points = [...this.points, x, y];
   }
   render() {
-    return <Line points={this.points} fill="white" stroke="white" />;
+    return <Line points={this.points} fill="white" stroke="white" tension = "10"/>;
   }
 }
 
@@ -153,8 +157,10 @@ class SceneWithDrawables extends Component {
       });
     }
   };
+  state = {BrushSize : 10}
   render() {
     const drawables = [...this.state.drawables, ...this.state.newDrawable];
+    
     return (
       <div>
         <div className="whiteboard__container">
@@ -179,6 +185,14 @@ class SceneWithDrawables extends Component {
         >
             <img src={Pencil} width={20} alt="pencil" className="toolbar-icon-img"/>
         </button>
+        <input
+						type='range'
+						min='10'
+						max='50'
+						value={this.state.BrushSize}
+						className='slider'
+						onChange={this.handlePencilSizeChange}
+					></input>
         <button className="toolbar__btn"
           onClick={e => {
             this.setState({ newDrawableType: "Eraser" });
